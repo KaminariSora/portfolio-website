@@ -2,14 +2,16 @@
 'use client'; // จำเป็นสำหรับ use-state
 
 import React, { useState } from 'react';
-import Image from 'next/image'; // สำหรับ optimize รูปภาพ
 import { Mail, FileText, Brain } from 'lucide-react';
 
-// ตัวอย่างข้อมูลโปรเจกต์
 const projects = [
-  { id: 1, title: 'AI Sentiment Analyzer', tags: ['Python', 'NLTK', 'Next.js'], image: 'https://via.placeholder.com/300x180.png?text=Sentiment+AI' },
-  { id: 2, title: 'Customer Churn Prediction', tags: ['Python', 'Scikit-learn', 'SQL'], image: 'https://via.placeholder.com/300x180.png?text=Churn+Prediction' },
-  { id: 3, title: 'Real-time Object Detection', tags: ['YOLOv8', 'Python', 'OpenCV'], image: 'https://via.placeholder.com/300x180.png?text=Object+Detection' },
+  { id: 1, title: 'CPE SWU line chatbot', tags: ['Python', 'Line Developer'], image: '#' },
+  { id: 2, title: 'Agentic AI for microsegmentation', tags: ['Python', 'Wazuh', 'Langchain'], image: '#' },
+  { id: 3, title: 'AI Chatbot for marketplace', tags: ['Python', 'Langchain', 'Next.js'], image: '../image/home/AIChatbotForMarketplace.png' },
+  { id: 4, title: 'Name', tags: ['Tags'], image: '#' },
+  { id: 5, title: 'Name', tags: ['Tags'], image: '#' },
+  { id: 6, title: 'Name', tags: ['Tags'], image: '#' },
+  { id: 7, title: 'Name', tags: ['Tags'], image: '#' },
 ];
 
 export default function Home() {

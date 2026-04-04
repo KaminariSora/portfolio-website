@@ -20,12 +20,12 @@ const itemVariants: Variants = {
 };
 
 const skills = [
-    { name: 'Python', icon: Code, level: "good" },
-    { name: 'Machine Learning', icon: Brain, level: "90" },
-    { name: 'Data Visualisation', icon: BarChart, level: "85" },
-    { name: 'SQL & NoSQL', icon: Database, level: "80" },
-    { name: 'Cloud (AWS/GCP)', icon: Zap, level: "75" },
-    { name: 'TensorFlow/PyTorch', icon: Award, level: "88" },
+    { name: 'Python', icon: Code, level: "GOOD" },
+    { name: 'Machine Learning', icon: Brain, level: "MEDIUM" },
+    { name: 'Data Visualisation', icon: BarChart, level: "MEDIUM" },
+    { name: 'Supabase', icon: Database, level: "MEDIUM" },
+    { name: 'Cloud (AWS/GCP)', icon: Zap, level: "BEGINNER" },
+    { name: 'TensorFlow/PyTorch', icon: Award, level: "MEDIUM" },
 ];
 
 const containerVariants = {
@@ -92,11 +92,11 @@ export default function AboutMe() {
                     />
 
                     <Image
-                        src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800" // รูปตัวอย่าง
+                        src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800"
                         alt="My Journey"
-                        fill // ใช้ fill เพื่อให้เต็มคอนเทนเนอร์ aspect-ratio
+                        fill
                         className="rounded-3xl object-cover shadow-2xl transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(255,165,0,0.15)]"
-                        sizes="(max-width: 768px) 100vw, 33vw" // สำหรับ Optimize รูปภาพ
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         priority
                     />
                 </motion.div>
