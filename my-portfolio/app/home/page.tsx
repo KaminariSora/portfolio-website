@@ -4,16 +4,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { askAI } from './actions';
-import { Mail, FileText, Brain, Sparkles } from 'lucide-react';
+import { Mail, FileText, Brain, Sparkles, GitFork } from 'lucide-react';
 
 const projects = [
-  { id: 1, title: 'CPE SWU line chatbot', tags: ['Python', 'Line Developer'], image: '#' },
-  { id: 2, title: 'Agentic AI for microsegmentation', tags: ['Python', 'Wazuh', 'Langchain'], image: '#' },
-  { id: 3, title: 'AI Chatbot for marketplace', tags: ['Python', 'Langchain', 'Next.js'], image: '../image/home/AIChatbotForMarketplace.png' },
-  { id: 4, title: 'Name', tags: ['Tags'], image: '#' },
-  { id: 5, title: 'Name', tags: ['Tags'], image: '#' },
-  { id: 6, title: 'Name', tags: ['Tags'], image: '#' },
-  { id: 7, title: 'Name', tags: ['Tags'], image: '#' },
+  { id: 1, title: 'CPE SWU line chatbot', tags: ['Python', 'Line Developer'], image: '../image/home/SWUChatBot.jpg' },
+  { id: 2, title: 'Agentic AI for microsegmentation', tags: ['Python', 'Wazuh', 'Langchain'], image: '../image/home/wazuh.jpg' },
+  { id: 3, title: 'AI Chatbot for marketplace', tags: ['Python', 'Langchain', 'Next.js', 'Web application'], image: '../image/home/AIChatbotForMarketplace.png' },
+  { id: 4, title: 'Q&A Chatbot for meeting resolution', tags: ['NextJS', 'Python', 'Uvicorn', 'Web application', 'n8n'], image: '../image/home/QAChatbotForMeetingResolution.png' },
+  { id: 5, title: 'WalkFromHome', tags: ['Flutter', 'Mobile Application'], image: '#' },
+  { id: 6, title: 'ChickChat', tags: ['JavaScript', 'php', 'Web Application'], image: '../image/home/ChickChat.png' },
+  { id: 7, title: 'HypnoCare', tags: ['Mobile Application', 'Flutter'], image: '../image/home/HypnoCare_logo.png' },
 ];
 
 export default function Home() {
@@ -24,11 +24,18 @@ export default function Home() {
   const handleAnalyze = async () => {
     setIsLoading(true);
     setResult('Thinking...');
-    
+
     const aiResponse = await askAI(input);
-    
+
     setResult(aiResponse);
     setIsLoading(false);
+  };
+
+  const handleHireMe = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -53,17 +60,20 @@ export default function Home() {
             {/* Social Icons (แบบ responsive) */}
             <div className="flex gap-4 text-slate-500 pt-2">
               <a href="#" className="hover:text-white transition"></a>
-              <a href="#" className="hover:text-white transition"></a>
+              <a href="https://github.com/KaminariSora" target='https://github.com/KaminariSora' className="hover:text-white transition"><GitFork size={24} /></a>
               <a href="#" className="hover:text-white transition"><Mail size={24} /></a>
             </div>
             {/* Buttons (Responsive) */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <button className="bg-orange-500 text-black px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition w-full sm:w-auto">
+              <button className="bg-orange-500 text-black px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition w-full sm:w-auto"
+              onClick={handleHireMe}>
                 Hire Me
               </button>
-              <button className="border border-slate-700 px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2 w-full sm:w-auto">
-                <FileText size={20} /> Download CV
-              </button>
+              <a className="border border-slate-700 px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2 w-full sm:w-auto"
+                href='/Nonthacha_Huanchitt_resume.pdf'
+                download="Nonthacha_Huanchitt_Resume.pdf">
+                <FileText size={20} /> Download Resume
+              </a>
             </div>
           </div>
 
@@ -130,7 +140,7 @@ export default function Home() {
             {projects.map((project) => (
               <div key={project.id} className="group bg-slate-800 rounded-2xl overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 border border-slate-700 hover:border-orange-400/50">
                 <div className="h-48 relative overflow-hidden">
-                  <img src={project.image} alt={project.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform" />
+                  <img src={project.image} alt={project.title} className="object-contain w-full h-full group-hover:scale-105 transition-transform" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">{project.title}</h3>
@@ -146,7 +156,7 @@ export default function Home() {
         </section>
 
         {/* --- Section 4: Contact Form --- */}
-        <section className="py-20 bg-gradient-to-t from-black to-slate-900 rounded-3xl border border-slate-800 px-6 md:px-12">
+        <section className="py-20 bg-gradient-to-t from-black to-slate-900 rounded-3xl border border-slate-800 px-6 md:px-12" id='contact'>
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl font-bold mb-4 text-center">Get In Touch</h2>
             <p className="text-slate-400 mb-10 text-center">Interested in discussing a project or just want to say hello?</p>

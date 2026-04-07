@@ -37,9 +37,10 @@ export default function RootLayout({
               <a href="/contact" className="hover:text-orange-400 transition">Contact me</a>
             </div>
 
-            <button className="bg-orange-500 text-black px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition text-sm">
+            <a className="bg-orange-500 text-black px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition text-sm"
+            href="/contact">
               Hire Me
-            </button>
+            </a>
           </nav>
         </header>
 
