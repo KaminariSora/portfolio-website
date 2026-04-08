@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { askAI } from './actions';
+import aiFunction from '../lib/langchain'
 import { Mail, FileText, Brain, Sparkles, GitFork } from 'lucide-react';
 
 const projects = [
@@ -19,16 +20,27 @@ const projects = [
 export default function Home() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState('');
+  const [time, setTime] = useState('')
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAnalyze = async () => {
+    const startTime = performance.now();
     setIsLoading(true);
     setResult('Thinking...');
 
-    const aiResponse = await askAI(input);
+    try {
+      const aiResponse = await aiFunction(input);
+      setResult(aiResponse);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      const endTime = performance.now();
 
-    setResult(aiResponse);
-    setIsLoading(false);
+      const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
+
+      setTime(durationInSeconds)
+      setIsLoading(false);
+    }
   };
 
   const handleHireMe = () => {
@@ -66,7 +78,7 @@ export default function Home() {
             {/* Buttons (Responsive) */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <button className="bg-orange-500 text-black px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition w-full sm:w-auto"
-              onClick={handleHireMe}>
+                onClick={handleHireMe}>
                 Hire Me
               </button>
               <a className="border border-slate-700 px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2 w-full sm:w-auto"
@@ -101,7 +113,7 @@ export default function Home() {
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything about Data Science or why parrots talk..."
+              placeholder="Ask me anything about my developer..."
               className="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none text-slate-200 h-32 transition-all"
             />
 
@@ -128,6 +140,7 @@ export default function Home() {
               >
                 <p className="text-xs text-orange-500 font-mono mb-2 uppercase tracking-widest">Response:</p>
                 {result}
+                <p className="text-xs text-gray-500 font-mono mt-2 tracking-widest">Though for: {time} s</p>
               </motion.div>
             )}
           </div>
