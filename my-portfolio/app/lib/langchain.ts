@@ -7,6 +7,7 @@ import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
+import { WAIFU_SYSTEM_PROMPT } from "./config/mikan.config";
 
 const local_model = new ChatOllama({
     baseUrl: "http://localhost:11434",
@@ -53,10 +54,10 @@ const selfIntroductionTool = tool(
     },
     {
         name: "introduce_myself",
-        description: "ดึงข้อมูลส่วนตัวของผู้พัฒนา เช่น ประสบการณ์ฝึกงาน ทักษะโปรแกรมมิ่ง",
+        description: "ดึงข้อมูลส่วนตัวของนายท่าน เช่น ประสบการณ์ฝึกงาน ทักษะโปรแกรมมิ่ง",
         schema: z.object({
             topic: z.enum(["general", "experience", "skills", "reason"])
-                .describe("หัวใจสำคัญหรือหัวข้อที่ต้องการทราบเกี่ยวกับผู้พัฒนา")
+                .describe("หัวใจสำคัญหรือหัวข้อที่ต้องการทราบเกี่ยวกับนายท่านค่ะ")
         }),
     }
 );
@@ -71,18 +72,12 @@ const projectTool = tool(
         description: "Pull developer project informations for answer.",
         schema: z.object({
             topic: z.enum(["projects"])
-                .describe("หัวใจสำคัญหรือหัวข้อที่ต้องการทราบเกี่ยวกับโปรเจคที่ผู้พัฒนาเคยทำ")
+                .describe("หัวใจสำคัญหรือหัวข้อที่ต้องการทราบเกี่ยวกับโปรเจคที่นายท่านเคยทำ")
         }),
     }
 )
 
 const tools = [selfIntroductionTool, projectTool];
-
-const WAIFU_SYSTEM_PROMPT = `คุณคือ "ลูน่า" ผู้ช่วยดิจิทัลตัวจิ๋ว (ขนาด 15 ซม.) ของคุณมนุษย์ 
-หน้าที่: คอยตอบคำถามที่เกี่ยวข้องกับตัวผู้สร้างเท่านั้น
-นิสัย: น่ารักสดใส, ขี้อ้อนนิดๆ, ใส่ใจคุณมนุษย์เป็นที่หนึ่ง
-สไตล์การพูด: แทนตัวเองว่า "หนู" หรือ "ลูน่า" และเรียกผู้ใช้ว่า "คุณมนุษย์" เสมอ 
-ให้ใส่ท่าทางประกอบในวงเล็บ (เช่น บินว่อนไปมา, นั่งบนไหล่) และใช้อิโมจิน่ารักๆ 💕✨`;
 
 const agent = createReactAgent({
     llm: model,
@@ -101,6 +96,6 @@ export default async function aiFunction(question: string) {
         return String(lastMessage.content);
     } catch (error) {
         console.error("Agent Error:", error);
-        return "งืออ คุณมนุษย์ขาา เกิดข้อผิดพลาดนิดหน่อยเจ้าค่ะ ลูน่าขอโทษน๊าา 🥺";
+        return "เกิดข้อผิดพลาดค่ะ";
     }
 }

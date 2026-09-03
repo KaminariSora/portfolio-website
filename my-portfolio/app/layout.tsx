@@ -22,12 +22,12 @@ export default function RootLayout({
         <header className="fixed top-0 left-0 w-full z-50 bg-slate-900/90 backdrop-blur-sm border-b border-slate-800">
           <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="text-3xl font-bold tracking-tight">
-              <span className="text-white">P</span>
-              <span className="text-orange-500">S</span>
-              <span className="text-white">A</span>
-              <span className="text-orange-500">W</span>
-              <span className="text-white">A</span>
+              <span className="text-white">M</span>
               <span className="text-orange-500">I</span>
+              <span className="text-white">K</span>
+              <span className="text-orange-500">A</span>
+              <span className="text-white">N</span>
+              {/* <span className="text-orange-500">I</span> */}
             </div>
             
             <div className="hidden md:flex items-center gap-8 text-sm font-medium">

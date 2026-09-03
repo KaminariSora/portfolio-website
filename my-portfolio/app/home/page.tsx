@@ -1,5 +1,4 @@
-// app/page.tsx
-'use client'; // จำเป็นสำหรับ use-state
+'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -26,10 +25,10 @@ const SUGGESTIONS = [
 ];
 
 const STATIC_RESPONSES: Record<number, string> = {
-  1: "ทักษะของคุณมนุษย์มีทั้ง Python, Next.js และการทำ RAG ที่ล้ำสุดๆ เลยเจ้าค่ะ! 💕",
-  2: "ประสบการณ์ฝึกงาน 6 เดือนที่ PTT Digital ทำให้คุณมนุษย์เก่งเรื่อง Data Science มากๆ เลยน๊าา ✨",
-  3: "(ยืดอกอย่างภูมิใจ) คุณมนุษย์ชื่นชอบโปรเจค Q&A Chatbot for meeting resolution มากที่สุดเลยค่ะ โปรเจคนี้เกี่ยวกับแชทบอทที่สรุปเนื้อหาการประชุมให้คุณมนุษย์ และนอกจากนี้ผู้สร้างของลูน่ากำไลังอยู่ในช่วงพัฒนา Project LUNA ให้เก่งยิ่งขึ้นไปอีกด้วย ผู้สร้างของลูน่าเก่งสุดๆไปเลยใช่ไหมคะ 💕",
-  4: "คุณมนุษย์ชอบ AI เพราะมันช่วยสร้าง Impact และเปลี่ยนโลกด้วยข้อมูลได้ยังไงล่ะคะ! 🚀",
+  1: "ทักษะของนายท่านมีทั้ง Python, Next.js และการทำ RAG ที่ล้ำสุดๆ เลยค่ะ!",
+  2: "ประสบการณ์ฝึกงาน 6 เดือนที่ PTT Digital ทำให้นายท่านเก่งเรื่อง Data Science มากๆ เลยน๊าา ✨",
+  3: "(ยืดอกอย่างภูมิใจ) นายท่านชื่นชอบโปรเจค Q&A Chatbot for meeting resolution มากที่สุดเลยค่ะ โปรเจคนี้เกี่ยวกับแชทบอทที่สรุปเนื้อหาการประชุมให้นายท่าน และนอกจากนี้ผู้สร้างของลูน่ากำไลังอยู่ในช่วงพัฒนา Project MIKAN ให้เก่งยิ่งขึ้นไปอีกด้วย ผู้สร้างของลูน่าเก่งสุดๆไปเลยใช่ไหมคะ 💕",
+  4: "นายท่านชอบ AI เพราะมันช่วยสร้าง Impact และเปลี่ยนโลกด้วยข้อมูลได้ยังไงล่ะคะ! 🚀",
 };
 
 export default function Home() {
@@ -42,7 +41,7 @@ export default function Home() {
   const handleAnalyze = async () => {
     if (isLoading) return;
     if (!input.trim()) {
-      setResult("รบกวนคุณมนุษย์ใส่คำถามก่อนนะคะ ✨");
+      setResult("รบกวนนายท่านใส่คำถามก่อนนะคะ ✨");
       return;
     }
 
@@ -65,7 +64,6 @@ export default function Home() {
       } else {
         response = await aiFunction(input);
       }
-      // -------------------------------------------------------
 
       setResult(response);
     } catch (error) {
@@ -140,14 +138,14 @@ export default function Home() {
         <section className="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
             <Brain className="text-orange-400" size={32} />
-            <h2 className="text-2xl font-bold text-white">AI Data Analyst Proxy by LUNA</h2>
+            <h2 className="text-2xl font-bold text-white">AI Data Analyst Proxy by MIKAN</h2>
           </div>
 
           <div className="space-y-4">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask LUNA about data science or about developer.."
+              placeholder="Ask MIKAN about data science or about developer.."
               className="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none text-slate-200 h-32 transition-all mb-1"
             />
 
@@ -179,7 +177,7 @@ export default function Home() {
                 >
                   <Sparkles size={20} />
                 </motion.div>
-              ) : "Talk with Luna"}
+              ) : "Talk with MIKAN"}
             </button>
 
             {result && (
@@ -188,17 +186,15 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="mt-6 p-6 bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-inner relative overflow-hidden"
               >
-                {/* หัวข้อ Response เก๋ๆ */}
                 <div className="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
                   <span className="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded font-mono tracking-tighter uppercase">
-                    Luna Intelligence Output
+                    MIKAN Intelligence Output
                   </span>
                   <span className="text-[10px] text-slate-500 font-mono">
                     Latency: {time}s
                   </span>
                 </div>
 
-                {/* ส่วนของการจัดรูปแบบ Markdown */}
                 <div className="prose prose-invert prose-sm max-w-none 
       prose-p:leading-relaxed prose-p:text-slate-300 
       prose-strong:text-orange-400 prose-strong:font-bold
