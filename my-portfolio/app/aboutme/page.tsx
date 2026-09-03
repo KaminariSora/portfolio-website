@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Brain, Database, BarChart, Code, Award, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 import { Variants } from 'framer-motion';
 import SkillCard from '../components/skillcards';
+import AuroraBackground from '../components/AuroraBackground';
+import { personalInfo, bio, skills } from '../lib/config/profile';
 
 const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
@@ -19,15 +21,6 @@ const itemVariants: Variants = {
     },
 };
 
-const skills = [
-    { name: 'Python', icon: Code, level: "GOOD" },
-    { name: 'Machine Learning', icon: Brain, level: "MEDIUM" },
-    { name: 'Data Visualisation', icon: BarChart, level: "MEDIUM" },
-    { name: 'Supabase', icon: Database, level: "MEDIUM" },
-    { name: 'Cloud (AWS/GCP)', icon: Zap, level: "BEGINNER" },
-    { name: 'TensorFlow/PyTorch', icon: Award, level: "MEDIUM" },
-];
-
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -40,8 +33,10 @@ const containerVariants = {
 
 export default function AboutMe() {
     return (
+        <div className="relative min-h-screen text-white">
+        <AuroraBackground />
         <motion.main
-            className="max-w-7xl mx-auto px-6 pt-32 pb-20 overflow-hidden"
+            className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 overflow-hidden"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -52,7 +47,7 @@ export default function AboutMe() {
                     About <span className="text-orange-400">Me</span>
                 </h1>
                 <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">
-                    Discover the journey, passion, and skills behind the Data Scientist.
+                    Discover the journey, passion, and skills behind the {personalInfo.role}.
                 </p>
             </motion.div>
 
@@ -62,18 +57,9 @@ export default function AboutMe() {
                 {/* ฝั่งซ้าย: เรื่องราว (Animated Text) */}
                 <motion.div variants={itemVariants} className="space-y-6 text-slate-300 text-lg leading-relaxed">
                     <h2 className="text-3xl font-bold text-white tracking-tight mb-6">My Data Science Journey</h2>
-                    <p>
-                        My journey in Data Science is driven by one belief — data alone has no value unless it creates impact.
-                    </p>
-                    <p>
-                        I have developed my skills from data analysis to AI and intelligent systems, focusing on solving real-world problems through technology.
-                    </p>
-                    <p>
-                        Each project I build is not just about models, but about delivering meaningful and usable solutions.
-                    </p>
-                    <p>
-                        I am committed to continuous learning and pushing my limits to become a better AI and Data professional.
-                    </p>
+                    {bio.story.map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                    ))}
                 </motion.div>
 
                 {/* ฝั่งขวา: รูปภาพ (Animated Image) */}
@@ -85,14 +71,14 @@ export default function AboutMe() {
                 >
                     {/* กรอบสี่เหลี่ยมด้านหลัง (Animated Line) */}
                     <motion.div
-                        className="absolute -inset-4 border-2 border-slate-700 rounded-3xl"
+                        className="absolute -inset-4 border-2 border-white/10 rounded-3xl"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
                     />
 
                     <Image
-                        src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        src={personalInfo.aboutImage}
                         alt="My Journey"
                         fill
                         className="rounded-3xl object-cover shadow-2xl transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(255,165,0,0.15)]"
@@ -105,7 +91,7 @@ export default function AboutMe() {
             {/* --- ส่วน Skills (Responsive Grid & Animated Bars) --- */}
             <motion.section
                 variants={itemVariants}
-                className="py-16 bg-slate-800/30 rounded-3xl border border-slate-800 px-6 md:px-12 backdrop-blur-sm"
+                className="py-16 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 px-6 md:px-12 shadow-[0_0_60px_rgba(249,115,22,0.06)]"
             >
                 <h2 className="text-3xl font-bold text-white tracking-tight text-center mb-12">
                     Core <span className="text-orange-400">Tech Stack</span>
@@ -126,14 +112,15 @@ export default function AboutMe() {
 
             {/* --- ปุ่ม Call-to-Action (Responsive) --- */}
             <motion.div variants={itemVariants} className="text-center mt-20 space-x-0 sm:space-x-4 space-y-4 sm:space-y-0 flex flex-col sm:flex-row justify-center items-center">
-                <a href="/portfolio" className="bg-orange-500 text-black px-10 py-4 rounded-full font-bold hover:bg-orange-600 transition text-lg w-full sm:w-auto text-center">
+                <a href="/portfolio" className="bg-orange-500 text-black px-10 py-4 rounded-full font-bold hover:bg-orange-400 transition text-lg w-full sm:w-auto text-center shadow-[0_0_25px_rgba(249,115,22,0.3)]">
                     View My Portfolio
                 </a>
-                <a href="/contact" className="border border-slate-700 px-10 py-4 rounded-full font-bold hover:bg-slate-800 transition text-lg w-full sm:w-auto text-center flex items-center justify-center gap-2">
+                <a href="/contact" className="border border-white/15 bg-white/5 backdrop-blur-sm px-10 py-4 rounded-full font-bold hover:bg-white/10 transition text-lg w-full sm:w-auto text-center flex items-center justify-center gap-2">
                     Let's Collaborate <Zap size={18} className="text-orange-400" />
                 </a>
             </motion.div>
 
         </motion.main>
+        </div>
     );
 }
